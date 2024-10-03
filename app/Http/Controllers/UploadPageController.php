@@ -11,6 +11,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
+use App\Jobs\ProcessFileJob;
+
 class UploadPageController extends Controller
 {
     public function showUploadForm()
@@ -36,8 +38,10 @@ class UploadPageController extends Controller
 
             $fullFilePath = storage_path('app/public/uploads/' . $fileName);
 
+
+            ProcessFileJob::dispatch($fullFilePath, $upload->id);
            
-                Excel::import(new ImportCustomers($upload->id), $fullFilePath); 
+            //    Excel::import(new ImportCustomers($upload->id), $fullFilePath); 
                 return redirect()->back()->with('success', 'File uploaded successfully and is being processed.');
         //}
 
