@@ -6,10 +6,29 @@
     <title>Upload Customer Data</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="container mt-5">
-    <h1 class="mb-4">Customer Data Management</h1>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Customer Management System</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ route('profile.edit') }}">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
 
     <!-- File Upload Form -->
+     <div class="container mt-5">
+
+    
     <div class="mb-4">
         <h2>Upload Customer Data File</h2>
 
@@ -49,7 +68,7 @@
         </form>
     </div>
 
-    <!-- Uploaded Files List -->
+    Uploaded Files List
     <div>
         <h2>Uploaded Files</h2>
         @if($uploads->isEmpty())
@@ -82,6 +101,7 @@
                 </tbody>
             </table>
         @endif
+    </div>
     </div>
 
     <!-- Bootstrap JS and dependencies -->
