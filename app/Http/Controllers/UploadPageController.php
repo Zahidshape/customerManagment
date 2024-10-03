@@ -13,26 +13,26 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class UploadPageController extends Controller
 {
-    public function showUploadForm()
-    {
-        $uploads = Upload::all();
-        return view('upload', compact('uploads'));
-    }
+    // public function showUploadForm()
+    // {
+    //     $uploads = Upload::all();
+    //     return view('upload', compact('uploads'));
+    // }
 
     public function uploadFile(Request $request)
     {
         
         //if ($request->hasFile('file')) {
-            // $file = $request->file('file');
-            // $fileName = time() . '_' . $file->getClientOriginalName();
-            // $filePath = $file->storeAs('uploads', $fileName, 'public');
-
             $file = $request->file('file');
-        $fileName = time() . '_' . $file->getClientOriginalName();
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('uploads', $fileName, 'public');
 
-            $file->move(public_path('uploads'), $fileName);
+        //     $file = $request->file('file');
+        // $fileName = time() . '_' . $file->getClientOriginalName();
 
-             dd(11);
+        //     $file->move(public_path('uploads'), $fileName);
+
+            //  dd(11);
              
             $upload = new Upload();
             $upload->file_name = $fileName;
@@ -42,7 +42,7 @@ class UploadPageController extends Controller
             
            
 
-            $fullFilePath = storage_path('app/public/' . $filePath);
+            $fullFilePath = storage_path('app/public/uploads/' . $fileName);
 
            
                 Excel::import(new ImportCustomers($upload->id), $fullFilePath); 
@@ -65,12 +65,8 @@ class UploadPageController extends Controller
            
             foreach ($customers as $customer) {
                 fputcsv($handle, [
-                    // $customer->name,
                     $customer->email,
                     $customer->phone_number,
-                    // $customer->address,
-                    // $customer->postcode,
-                    $customer->country
                 ]);
             }
             fclose($handle);

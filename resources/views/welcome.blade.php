@@ -8,9 +8,17 @@
 </head>
 <body class="d-flex justify-content-center align-items-center vh-100">
 
+
     <div class="text-center">
-        <a class="btn btn-primary" href="{{ url('/upload') }}" role="button">Click here to upload file</a>
+        <a class="btn btn-primary" href="{{ url('/login') }}" role="button">login</a>
     </div>
+    <div class="text-center">
+        <a class="btn btn-primary" href="{{ url('/register') }}" role="button">Register</a>
+    </div>
+    
+    <!-- <div class="text-center">
+        <a class="btn btn-primary" href="{{ url('/upload') }}" role="button">Click here to upload file</a>
+    </div> -->
 
     <!-- Optional: Include Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9U1BL0OoHfE4nX8Y8Hb9QZzO1Fz3e7OjLrT5Ao1H5t2b9AiHEaC" crossorigin="anonymous"></script>

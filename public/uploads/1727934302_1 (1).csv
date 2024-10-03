@@ -1,0 +1,5 @@
+"name,email,phone_number,address,postal_code,country,source
+John Doe,johndoe@example.com,1234567890,123 Main St,12345,USA,Online
+Jane Smith,janesmith@example.com,9876543210,456 Elm St,67890,Canada,Referral
+Alex Brown,alexbrown@example.com,5551234567,789 Oak St,54321,UK,Ads
+Chris Green,chrisgreen@example.com,3219876543,101 Pine St,11122,Australia,Search"

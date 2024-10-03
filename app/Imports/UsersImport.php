@@ -18,13 +18,13 @@ class ImportCustomers implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         return new Customer([
-            'name' => $row['name'],
+            // 'name' => $row['name'],
             'email' => $row['email'],
             'phone_number' => $row['phone_number'],
-            'address' => $row['address'],
-            'postal_code' => $row['postal_code'],
-            'country' => $row['country'],
-            'source' => $row['source'],
+            // 'address' => $row['address'],
+            // 'postal_code' => $row['postal_code'],
+            // 'country' => $row['country'],
+            // 'source' => $row['source'],
         ]);
     }
 }

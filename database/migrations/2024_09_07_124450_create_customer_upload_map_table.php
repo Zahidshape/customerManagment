@@ -15,12 +15,8 @@ return new class extends Migration
             $table->unsignedBigInteger('upload_id'); // Foreign key to uploads table
             $table->timestamps(); // Created_at and updated_at timestamps
 
-            // Foreign key constraints
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->foreign('upload_id')->references('id')->on('uploads')->onDelete('cascade');
+          
 
-            // Optional: Ensure uniqueness of customer-upload pairs
-            $table->unique(['customer_id', 'upload_id']);
         });
     }
 
