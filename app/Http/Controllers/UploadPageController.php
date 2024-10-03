@@ -11,15 +11,13 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
-use App\Jobs\ProcessFileJob;
-
 class UploadPageController extends Controller
 {
-    // public function showUploadForm()
-    // {
-    //     $uploads = Upload::all();
-    //     return view('upload', compact('uploads'));
-    // }
+    public function showUploadForm()
+    {
+        $uploads = Upload::all();
+        return view('upload', compact('uploads'));
+    }
 
     public function uploadFile(Request $request)
     {
@@ -28,29 +26,19 @@ class UploadPageController extends Controller
             $file = $request->file('file');
             $fileName = time() . '_' . $file->getClientOriginalName();
             $filePath = $file->storeAs('uploads', $fileName, 'public');
-
-            //     $file = $request->file('file');
-            // $fileName = time() . '_' . $file->getClientOriginalName();
-
-            //     $file->move(public_path('uploads'), $fileName);
-
-            //  dd(11);
              
             $upload = new Upload();
             $upload->file_name = $fileName;
             $upload->source = $request->input('source');
-            $upload->upload_date = now();
             $upload->save();
             
            
 
             $fullFilePath = storage_path('app/public/uploads/' . $fileName);
 
-            ProcessFileJob::dispatch($fullFilePath, $upload->id);
-
            
-            //    Excel::import(new ImportCustomers($upload->id), $fullFilePath); 
-            return redirect()->back()->with('success', 'File uploaded successfully and is being processed.');
+                Excel::import(new ImportCustomers($upload->id), $fullFilePath); 
+                return redirect()->back()->with('success', 'File uploaded successfully and is being processed.');
         //}
 
         
