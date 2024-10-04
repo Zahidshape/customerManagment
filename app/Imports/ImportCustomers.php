@@ -62,12 +62,13 @@ class ImportCustomers implements ToModel, WithHeadingRow, WithChunkReading, With
             } else {
                 
                 $customersToInsert[] = [
-                    // 'name' => $row['name'],
+                    'first_name' => $row['first_name'],
+                    'last_name' => $row['last_name'],
                     'phone_number' => $row['phone_number'],
                     'email' => $row['email'],
-                    // 'address' => $row['address'],
-                    // 'postcode' => $row['postal_code'],
-                    // 'country' => $row['country'],
+                    'address' => $row['months_at_address'],
+                    'postcode' => $row['postcode'],
+                    'county' => $row['county'],
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];

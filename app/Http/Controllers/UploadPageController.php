@@ -57,12 +57,14 @@ class UploadPageController extends Controller
         $response = new StreamedResponse(function () use ($customers) {
             $handle = fopen('php://output', 'w');
 
-            fputcsv($handle, ['Email','Phone Number']);
+            fputcsv($handle, ['first_name', 'last_name','phone_number','email']);
            
             foreach ($customers as $customer) {
                 fputcsv($handle, [
-                    $customer->email,
+                    $customer->first_name,
+                    $customer->last_name,
                     $customer->phone_number,
+                    $customer->email,
                 ]);
             }
             fclose($handle);
@@ -87,16 +89,14 @@ class UploadPageController extends Controller
         $response = new StreamedResponse(function () use ($customers) {
             $handle = fopen('php://output', 'w');
            
-            fputcsv($handle, ['Email','Phone Number']);
+            fputcsv($handle, ['first_name', 'last_name','phone_number','email']);
              
             foreach ($customers as $customer) {
                 fputcsv($handle, [
-                    // $customer->name,
-                    $customer->email,
+                    $customer->first_name,
+                    $customer->last_name,
                     $customer->phone_number,
-                    // $customer->address,
-                    // $customer->postcode,
-                    // $customer->country
+                    $customer->email
                 ]);
             }
             fclose($handle);
