@@ -76,27 +76,30 @@ class UploadPageController extends Controller
         return $response;
     }
 
-    public function downloadDuplicateCustomers()
+    public function downloadDuplicateCustomers(Request $request)
     {
-         
-        $duplicateCustomerIds = CustomerUploadMap::where('is_duplicate', true)->pluck('customer_id');
+        $uploadId =$request->get('uploadId');
 
-       
-        
+        $duplicateCustomerIds = CustomerUploadMap::where('is_duplicate', true)
+            ->where('upload_id', $uploadId)
+            ->pluck('customer_id');
 
-        $customers = Customer::whereIn('id', $duplicateCustomerIds)->get();   
+        $customers = Customer::whereIn('id', $duplicateCustomerIds)->get();
 
-        $response = new StreamedResponse(function () use ($customers) {
+        $source = $customers[0]->upload->source;
+
+        $response = new StreamedResponse(function () use ($customers, $source) {
             $handle = fopen('php://output', 'w');
            
-            fputcsv($handle, ['first_name', 'last_name','phone_number','email']);
+            fputcsv($handle, ['first_name', 'last_name','phone_number','email', 'source']);
              
             foreach ($customers as $customer) {
                 fputcsv($handle, [
                     $customer->first_name,
                     $customer->last_name,
                     $customer->phone_number,
-                    $customer->email
+                    $customer->email,
+                    $source,
                 ]);
             }
             fclose($handle);

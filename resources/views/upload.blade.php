@@ -93,8 +93,8 @@
                             <td>{{ $upload->source }}</td>
                             <td>{{ \Carbon\Carbon::parse($upload->date)->format('Y-m-d') }}</td>
                             <td>
-                                <a href="{{ route('download.unique.customers') }}" class="btn btn-primary">Unique Customers</a>
-                                <a href="{{ route('download.duplicate.customers') }}" class="btn btn-primary">Duplicate Customers</a>
+                                <a href="{{ route('download.unique.customers', ['uploadId' => $upload->id]) }}" class="btn btn-primary">Unique Customers</a>
+                                <a href="{{ route('download.duplicate.customers', ['uploadId' => $upload->id]) }}" class="btn btn-primary">Duplicate Customers</a>
                             </td>
                         </tr>
                     @endforeach
