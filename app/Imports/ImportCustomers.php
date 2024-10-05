@@ -62,6 +62,7 @@ class ImportCustomers implements ToModel, WithHeadingRow, WithChunkReading, With
             } else {
                 
                 $customersToInsert[] = [
+                    'upload_id' => $this->uploadId,
                     'first_name' => $row['first_name'],
                     'last_name' => $row['last_name'],
                     'phone_number' => $row['phone_number'],
