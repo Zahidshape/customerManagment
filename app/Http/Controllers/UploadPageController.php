@@ -50,9 +50,10 @@ class UploadPageController extends Controller
     }
 
 
-    public function downloadUniqueCustomers()
+    public function downloadUniqueCustomers(Request $request)
     {
-        $customers = Customer::all();  
+        $uploadId =$request->get('uploadId');
+        $customers = Customer::where('upload_id', $uploadId)->get();  
 
         $response = new StreamedResponse(function () use ($customers) {
             $handle = fopen('php://output', 'w');
@@ -78,7 +79,7 @@ class UploadPageController extends Controller
 
     public function downloadDuplicateCustomers(Request $request)
     {
-        $uploadId =$request->get('uploadId');
+        $uploadId = $request->get('uploadId');
 
         $duplicateCustomerIds = CustomerUploadMap::where('is_duplicate', true)
             ->where('upload_id', $uploadId)
