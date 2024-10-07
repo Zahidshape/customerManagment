@@ -8,11 +8,11 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Customer Management System</a>
+  <a class="navbar-brand" href="#" style="margin-left:25px">Customer Management System</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <div class="collapse navbar-collapse" id="navbarNav" style="margin-left:75%">
     <ul class="navbar-nav">
       <li class="nav-item active">
         <a class="nav-link" href="{{ route('profile.edit') }}">Profile</a>
