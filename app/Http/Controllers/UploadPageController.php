@@ -53,6 +53,15 @@ class UploadPageController extends Controller
     public function downloadUniqueCustomers(Request $request)
     {
         $uploadId =$request->get('uploadId');
+
+        $upload = Upload::where('id', $uploadId)->first();
+
+        if (!$upload) {
+            return;
+        }
+
+        $fileName = explode('.', $upload->file_name)[0];
+
         $customers = Customer::where('upload_id', $uploadId)->get();  
 
         $response = new StreamedResponse(function () use ($customers) {
@@ -71,7 +80,7 @@ class UploadPageController extends Controller
             fclose($handle);
         }, 200, [
             'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="unique_customers.csv"',
+            'Content-Disposition' => 'attachment; filename="'.$fileName.'"_unique_customers.csv"',
         ]);
 
         return $response;
@@ -80,6 +89,15 @@ class UploadPageController extends Controller
     public function downloadDuplicateCustomers(Request $request)
     {
         $uploadId = $request->get('uploadId');
+
+        $upload = Upload::where('id', $uploadId)->first();
+
+        if (!$upload) {
+            return;
+        }
+
+        $fileName = explode('.', $upload->file_name)[0];
+
 
         $duplicateCustomerIds = CustomerUploadMap::where('is_duplicate', true)
             ->where('upload_id', $uploadId)
@@ -106,7 +124,7 @@ class UploadPageController extends Controller
             fclose($handle);
         }, 200, [
             'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="duplicate_customers.csv"',
+            'Content-Disposition' => 'attachment; filename="'.$fileName.'"_duplicate_customers.csv"',
         ]);
 
         return $response;
