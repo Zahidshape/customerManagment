@@ -68,7 +68,6 @@
         </form>
     </div>
 
-    Uploaded Files List
     <div>
         <h2>Uploaded Files</h2>
         @if($uploads->isEmpty())
