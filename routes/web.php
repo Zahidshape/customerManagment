@@ -10,9 +10,9 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::get('/', [AdminController::class, 'index']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::group([ 'middleware' => 'auth'],function () {
