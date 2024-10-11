@@ -15,10 +15,38 @@ use App\Jobs\ProcessFileJob;
 
 class UploadPageController extends Controller
 {
+    public function showDashboard()
+    {
+
+        $totalFiles = Upload::count();
+        $uniquecustomers = customer::count();
+        $duplicatecustomers = CustomerUploadMap::count();
+
+        $data = ['active' => 'dashboard'];
+        return view('dashboard', $data, compact('totalFiles','uniquecustomers','duplicatecustomers'));
+    }
     public function showUploadForm()
     {
-        $uploads = Upload::all();
-        return view('upload', compact('uploads'));
+        $data = ['active' => 'upload'];
+        return view('upload', $data);
+    }
+
+    
+    public function getAllCustomers() {
+        
+        $customers = customer::paginate(15);
+        $status = ['active' => 'customerlist'];
+        $data = compact('customers');
+        return view ('customerlist',$status)->with($data);
+    }
+    
+    public function getAllfiles()
+    {
+        $uploads = Upload::paginate(15);
+        $totalFiles = Upload::count();
+        
+        $data = ['active' => 'files'];
+        return view('files',$data, compact('uploads'));
     }
 
     public function uploadFile(Request $request)
@@ -67,14 +95,19 @@ class UploadPageController extends Controller
         $response = new StreamedResponse(function () use ($customers) {
             $handle = fopen('php://output', 'w');
 
-            fputcsv($handle, ['first_name', 'last_name','phone_number','email']);
+            fputcsv($handle, ['first_name', 'last_name','phone_number','email','address','postcode','county']);
            
             foreach ($customers as $customer) {
                 fputcsv($handle, [
+
                     $customer->first_name,
                     $customer->last_name,
                     $customer->phone_number,
                     $customer->email,
+                    $customer->address,
+                    $customer->postcode,
+                    $customer->county,
+                    
                 ]);
             }
             fclose($handle);
@@ -110,15 +143,18 @@ class UploadPageController extends Controller
         $response = new StreamedResponse(function () use ($customers, $source) {
             $handle = fopen('php://output', 'w');
            
-            fputcsv($handle, ['first_name', 'last_name','phone_number','email', 'source']);
+            fputcsv($handle, ['first_name', 'last_name','phone_number','email','address','postcode','county']);
              
             foreach ($customers as $customer) {
                 fputcsv($handle, [
+                   
                     $customer->first_name,
                     $customer->last_name,
                     $customer->phone_number,
                     $customer->email,
-                    $source,
+                    $customer->address,
+                    $customer->postcode,
+                    $customer->county,
                 ]);
             }
             fclose($handle);

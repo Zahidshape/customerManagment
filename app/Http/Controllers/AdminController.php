@@ -10,7 +10,7 @@ class AdminController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            return redirect()->route('upload.form');
+            return redirect()->route('dashboard');
         } else {
             return redirect()->route('login');
         }

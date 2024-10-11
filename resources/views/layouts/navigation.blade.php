@@ -10,7 +10,7 @@
                     </a>
                 </div>
 
-                
+  
             </div>
 
             <!-- Settings Dropdown -->
@@ -34,7 +34,7 @@
                         </x-dropdown-link>
 
                         <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="get" action="{{ route('logout') }}">
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"

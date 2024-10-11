@@ -14,13 +14,16 @@ class Customer extends Model
 
     // Define the attributes that are mass assignable
     protected $fillable = [
-        // 'name',
+       
+        'first_name' ,
+        'last_name' ,
+        'phone_number' ,
         'email',
-        'phone_number',
-        // 'address',
-        // 'postcode',
-        // 'country',
-        // 'source'
+        'address',
+        'postcode',
+        'county',
+        'created_at',
+        'updated_at',
     ];
 
     // Define the unique fields
