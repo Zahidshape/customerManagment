@@ -7,9 +7,28 @@
         </div>
         <div class="container-fluid py-4">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                  <h6 class="text-white text-capitalize ps-3">Files Data</h6>
+
+                    <h6 class="text-white text-capitalize ps-3">Files Data</h6>
                 </div>
-        <table class="table table-striped table-bordered">
+                <div class="container-fluid py-3">
+                    <!--  Unique Error Message -->
+                    @if (session('error'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    @endif
+                    <!--  Duplicate Error Message -->
+                    @if (session('message'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('message') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    @endif
+
+                    
+                </div>
+                <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>File Name</th>

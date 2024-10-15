@@ -10,12 +10,18 @@
               </div>
             </div>
 
-        <!-- Success Message -->
-        @if (session('success'))
+   
+        <div class="container-fluid py-4">
+
+
+             <!-- Success Message -->
+             @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+        {{ session('success') }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
         @endif
 
         <!-- Error Message -->
@@ -33,7 +39,6 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
-        <div class="container-fluid py-4">
         <form action="{{ url('upload') }}" method="POST" enctype="multipart/form-data" class="d-flex flex-column gap-3">
             @csrf
             <div class="mb-3 col-sm-6">
@@ -44,7 +49,7 @@
             </div>
 
             <div class="mb-3 col-sm-3">
-                <button type="submit" class="btn btn-primary">Upload</button>
+                <button type="submit" class="btn btn-primary" >Upload</button>
 
             </div>
         </form>

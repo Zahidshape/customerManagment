@@ -92,6 +92,11 @@ class UploadPageController extends Controller
 
         $customers = Customer::where('upload_id', $uploadId)->get();  
 
+        if ($customers->isEmpty()) {
+            
+            return redirect()->back()->with('error', 'No unique customers available for download.');
+        }
+
         $response = new StreamedResponse(function () use ($customers) {
             $handle = fopen('php://output', 'w');
 
@@ -137,6 +142,11 @@ class UploadPageController extends Controller
             ->pluck('customer_id');
 
         $customers = Customer::whereIn('id', $duplicateCustomerIds)->get();
+
+        if ($customers->isEmpty()) {
+            
+            return redirect()->back()->with('message', 'No Duplicate customers available for download.');
+        }
 
         $source = $customers[0]->upload->source;
 

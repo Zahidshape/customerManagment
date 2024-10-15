@@ -31,7 +31,7 @@
               </div>
               <div class="text-end pt-1">
               <br><br>
-                <h4 class="mb-0">Unique customers</h4>
+                <h4 class="mb-0">Unique customer</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -49,12 +49,12 @@
               </div>
               <div class="text-end pt-1">
                 <br><br>
-                <h4 class="mb-0">Duplicate Customers</h4>
+                <h4 class="mb-0">Duplicate Customer</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-              <p class="mb-0">Duplicate Customer-<span class="text-danger text-sm font-weight-bolder">{{$duplicatecustomers}}</span> </p>
+              <p class="mb-0">Duplicate Customer<span class="text-danger text-sm font-weight-bolder">{{$duplicatecustomers}}</span> </p>
             </div>
           </div>
         </div>
