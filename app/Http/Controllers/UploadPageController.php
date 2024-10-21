@@ -62,14 +62,20 @@ class UploadPageController extends Controller
             $upload->source = $request->input('source');
             $upload->save();
             
-           
-
             $fullFilePath = storage_path('app/public/uploads/' . $fileName);
 
+         //  Live - Insert Data by command   
+            $logFilePath = '/home/techsoul/public_html/cms.tech-soul.com/storage/logs/import_customers.log';
+            $command = '/opt/cpanel/ea-php82/root/usr/bin/php /home/techsoul/public_html/cms.tech-soul.com/artisan import:customers ' . $upload->id . ' "' . $fullFilePath . '" >> ' . $logFilePath . ' 2>&1 &';
+            pclose(popen($command, 'r'));
 
-            ProcessFileJob::dispatch($fullFilePath, $upload->id);
-           
-            //    Excel::import(new ImportCustomers($upload->id), $fullFilePath); 
+            // Local - Insert Data by command
+            // $command = 'start /B php C:\Users\HP\Desktop\Projects\cms\customerManagment\artisan import:customers ' . $upload->id . ' "' . $fullFilePath . '" > NUL 2>&1';
+            // pclose(popen($command, 'r'));
+
+
+            // ProcessFileJob::dispatch($fullFilePath, $upload->id);
+            //  Excel::import(new ImportCustomers($upload->id), $fullFilePath); 
                 return redirect()->back()->with('success', 'File uploaded successfully and is being processed.');
         //}
 
