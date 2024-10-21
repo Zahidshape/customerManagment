@@ -10,12 +10,16 @@
                     </a>
                 </div>
 
+<<<<<<< HEAD
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+=======
+  
+>>>>>>> 9e8ef1d686c7d134e2e8aff4d249149f4798af23
             </div>
 
             <!-- Settings Dropdown -->
@@ -39,7 +43,7 @@
                         </x-dropdown-link>
 
                         <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="get" action="{{ route('logout') }}">
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"

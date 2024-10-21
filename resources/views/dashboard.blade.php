@@ -1,56 +1,81 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Customer Management') }}
-        </h2>
-    </x-slot>
+@extends("layouts.layout")
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                     <!-- File Upload Form -->
-    <div class="mb-4">
-        <h2>Upload Customer Data File</h2>
-
-        <!-- Success Message -->
-        @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
-
-        <!-- Error Message -->
-        @if (session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
-
-        <!-- Info Message -->
-        @if(session('message'))
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
-            {{ session('message') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
-
-        <form action="{{ url('upload') }}" method="POST" enctype="multipart/form-data" class="d-flex flex-column gap-3">
-            @csrf
-            <div class="mb-3">
-                <input type="file" name="file" accept=".csv" class="form-control" required>
+@section("content")
+<div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div
+                class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">weekend</i>
+              </div>
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize"></p>
+                <br><br>
+                <h4 class="mb-0">Total Uploaded Files</h4>
+              </div>
             </div>
-            <div class="mb-3">
-                <input type="text" name="source" class="form-control" placeholder="Source" required>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+            <p class="mb-0">Files  Uploaded-<span class="text-success text-sm font-weight-bolder">{{ $totalFiles }}</span> </p>
             </div>
-            <button type="submit" class="btn btn-primary">Upload</button>
-        </form>
-    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </div>
-    
-</x-app-layout>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div
+                class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">person</i>
+              </div>
+              <div class="text-end pt-1">
+              <br><br>
+                <h4 class="mb-0">Unique customer</h4>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+              <p class="mb-0"> Unique Customers-<span class="text-success text-sm font-weight-bolder">{{ $uniquecustomers }} </span></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div
+                class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">person</i>
+              </div>
+              <div class="text-end pt-1">
+                <br><br>
+                <h4 class="mb-0">Duplicate Customer</h4>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+              <p class="mb-0">Duplicate Customer<span class="text-danger text-sm font-weight-bolder">{{$duplicatecustomers}}</span> </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6">
+          <!-- <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div
+                class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">weekend</i>
+              </div>
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">Sales</p>
+                <h4 class="mb-0">$103,430</h4>
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>than yesterday</p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+      
+      @endsection

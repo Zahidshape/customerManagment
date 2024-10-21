@@ -24,7 +24,11 @@ class Upload extends Model
     // Define relationships if necessary
     public function customers()
     {
-        return $this->hasMany(Customer::class);
+        return $this->hasMany(Customer::class, 'upload_id', 'id');
+    }
+    public function CustomerUploadMap()
+    {
+        return $this->hasMany(CustomerUploadMap::class, 'upload_id', 'id');
     }
 }
 

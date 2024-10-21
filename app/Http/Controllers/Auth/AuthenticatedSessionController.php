@@ -16,7 +16,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('login');
     }
 
     /**
@@ -28,8 +28,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        //return redirect('upload.form');
-        return redirect()->route('upload.form');
+        return redirect('dashboard');
+        // return redirect()->route('upload.form');
     }
 
     /**

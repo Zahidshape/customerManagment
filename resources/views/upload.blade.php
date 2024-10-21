@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,20 +23,32 @@
     </ul>
   </div>
 </nav>
+=======
+@extends("layouts.layout")
+>>>>>>> 9e8ef1d686c7d134e2e8aff4d249149f4798af23
 
-    <!-- File Upload Form -->
+@section("content")
+   
      <div class="container mt-5">
-
-    
     <div class="mb-4">
-        <h2>Upload Customer Data File</h2>
+    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">Upload Customer's File</h6>
+              </div>
+            </div>
 
-        <!-- Success Message -->
-        @if (session('success'))
+   
+        <div class="container-fluid py-4">
+
+
+             <!-- Success Message -->
+             @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+        {{ session('success') }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
         @endif
 
         <!-- Error Message -->
@@ -53,19 +66,24 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
-
         <form action="{{ url('upload') }}" method="POST" enctype="multipart/form-data" class="d-flex flex-column gap-3">
             @csrf
-            <div class="mb-3">
-                <input type="file" name="file" accept=".csv" class="form-control" required>
+            <div class="mb-3 col-sm-6">
+                <input type="file" name="file" accept=".csv" class="form-control" required style="border-color: #d63384;">
             </div>
-            <div class="mb-3">
-                <input type="text" name="source" class="form-control" placeholder="Source" required>
+            <div class="mb-3 col-sm-6">
+                <input type="text" name="source" class="form-control" placeholder="Source" required style="border-color: #d63384;">
             </div>
-            <button type="submit" class="btn btn-primary">Upload</button>
+
+            <div class="mb-3 col-sm-3">
+                <button type="submit" class="btn btn-primary" >Upload</button>
+
+            </div>
         </form>
+        </div>
     </div>
 
+<<<<<<< HEAD
     Uploaded Files List
     <div>
         <h2>Uploaded Files</h2>
@@ -99,11 +117,9 @@
                 </tbody>
             </table>
         @endif
+=======
+  
+>>>>>>> 9e8ef1d686c7d134e2e8aff4d249149f4798af23
     </div>
     </div>
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
+    @endsection

@@ -16,13 +16,18 @@ Route::get('/', [AdminController::class, 'index']);
 
 
 Route::group([ 'middleware' => 'auth'],function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-
+    
+    Route::get('/dashboard', [UploadPageController::class, 'showDashboard'])->name('dashboard');
+    // Route::get('/dashboard', [UploadPageController::class, 'getAllfiles'])->name('dashboard');
     Route::get('/upload', [UploadPageController::class, 'showUploadForm'])->name('upload.form');
     Route::post('/upload', [UploadPageController::class, 'uploadFile'])->name('upload.file');
+    
+    Route::get('/customer', [UploadPageController::class, 'getAllCustomers'])->name('customer.list');
+    Route::get('/files', [UploadPageController::class, 'getAllfiles'])->name('file.list');
 
 
     Route::get('/upload/download-unique-customers', [UploadPageController::class, 'downloadUniqueCustomers'])->name('download.unique.customers');
