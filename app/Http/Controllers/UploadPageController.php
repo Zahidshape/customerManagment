@@ -65,13 +65,13 @@ class UploadPageController extends Controller
             $fullFilePath = storage_path('app/public/uploads/' . $fileName);
 
          //  Live - Insert Data by command   
-            $logFilePath = '/home/techsoul/public_html/cms.tech-soul.com/storage/logs/import_customers.log';
-            $command = '/opt/cpanel/ea-php82/root/usr/bin/php /home/techsoul/public_html/cms.tech-soul.com/artisan import:customers ' . $upload->id . ' "' . $fullFilePath . '" >> ' . $logFilePath . ' 2>&1 &';
-            pclose(popen($command, 'r'));
+            // $logFilePath = '/home/techsoul/public_html/cms.tech-soul.com/storage/logs/import_customers.log';
+            // $command = '/opt/cpanel/ea-php82/root/usr/bin/php /home/techsoul/public_html/cms.tech-soul.com/artisan import:customers ' . $upload->id . ' "' . $fullFilePath . '" >> ' . $logFilePath . ' 2>&1 &';
+            // pclose(popen($command, 'r'));
 
             // Local - Insert Data by command
-            // $command = 'start /B php C:\Users\HP\Desktop\Projects\cms\customerManagment\artisan import:customers ' . $upload->id . ' "' . $fullFilePath . '" > NUL 2>&1';
-            // pclose(popen($command, 'r'));
+            $command = 'start /B php C:\Users\BUTT\Desktop\cms_clone\customerManagment\artisan import:customers ' . $upload->id . ' "' . $fullFilePath . '" > NUL 2>&1';
+            pclose(popen($command, 'r'));
 
 
             // ProcessFileJob::dispatch($fullFilePath, $upload->id);
@@ -84,10 +84,20 @@ class UploadPageController extends Controller
     }
 
 
-    public function downloadUniqueCustomers()
+    public function downloadUniqueCustomers(Request $request)
     {
-        $customers = Customer::all();  
+        $uploadId =$request->get('uploadId');
 
+        $upload = Upload::where('id', $uploadId)->first();
+
+        if (!$upload) {
+            return;
+        }
+
+        $fileName = explode('.', $upload->file_name)[0];
+
+        $customers = Customer::where('upload_id', $uploadId)->get(); 
+        
         if ($customers->isEmpty()) {
             
             return redirect()->back()->with('error', 'No unique customers available for download.');
@@ -96,32 +106,38 @@ class UploadPageController extends Controller
         $response = new StreamedResponse(function () use ($customers) {
             $handle = fopen('php://output', 'w');
 
-            fputcsv($handle, ['Email','Phone Number']);
+            fputcsv($handle, ['first_name', 'last_name','phone_number','email','address','postcode','county']);
            
             foreach ($customers as $customer) {
                 fputcsv($handle, [
-                    $customer->email,
+                    $customer->first_name,
+                    $customer->last_name,
                     $customer->phone_number,
+                    $customer->email,
+                    $customer->address,
+                    $customer->postcode,
+                    $customer->county,
+
                 ]);
             }
             fclose($handle);
         }, 200, [
             'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="unique_customers.csv"',
+            'Content-Disposition' => 'attachment; filename="'.$fileName.'"_unique_customers.csv"',
         ]);
 
         return $response;
     }
 
-    public function downloadDuplicateCustomers()
+    public function downloadDuplicateCustomers(Request $request)
     {
-         
-        $duplicateCustomerIds = CustomerUploadMap::where('is_duplicate', true)->pluck('customer_id');
+        $uploadId = $request->get('uploadId');
 
-       
-        
+        $upload = Upload::where('id', $uploadId)->first();
 
-        $customers = Customer::whereIn('id', $duplicateCustomerIds)->get();   
+        if (!$upload) {
+            return;
+        }
 
         $fileName = explode('.', $upload->file_name)[0];
 
@@ -142,11 +158,10 @@ class UploadPageController extends Controller
         $response = new StreamedResponse(function () use ($customers, $source) {
             $handle = fopen('php://output', 'w');
            
-            fputcsv($handle, ['first_name', 'last_name','phone_number','email','address','postcode','county']);
+            fputcsv($handle,['first_name', 'last_name','phone_number','email','address','postcode','county']);
              
             foreach ($customers as $customer) {
                 fputcsv($handle, [
-                   
                     $customer->first_name,
                     $customer->last_name,
                     $customer->phone_number,
@@ -159,12 +174,16 @@ class UploadPageController extends Controller
             fclose($handle);
         }, 200, [
             'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="duplicate_customers.csv"',
+            'Content-Disposition' => 'attachment; filename="'.$fileName.'"_duplicate_customers.csv"',
         ]);
 
         return $response;
     }
 }
+    
+
+
+
     
 
 

@@ -31,4 +31,8 @@ class Customer extends Model
         'email' => 'required|email|unique:customers,email',
         'phone_number' => 'required|unique:customers,phone_number'
     ];
+    public function upload()
+    {
+        return $this->belongsTo(Upload::class,  'upload_id', 'id');
+    }
 }
