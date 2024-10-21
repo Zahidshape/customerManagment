@@ -1,31 +1,5 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Customer Data</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
-  <a class="navbar-brand" href="#">Customer Management System</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-  <ul class="navbar-nav ms-auto"> 
-      
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('logout') }}">Logout</a>
-      </li>
-      
-    </ul>
-  </div>
-</nav>
-=======
 @extends("layouts.layout")
->>>>>>> 9e8ef1d686c7d134e2e8aff4d249149f4798af23
+
 
 @section("content")
    
@@ -83,43 +57,6 @@
         </div>
     </div>
 
-<<<<<<< HEAD
-    Uploaded Files List
-    <div>
-        <h2>Uploaded Files</h2>
-        @if($uploads->isEmpty())
-            <div class="alert alert-info alert-dismissible fade show" role="alert">
-                No files have been uploaded yet.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @else
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>File Name</th>
-                        <th>Source</th>
-                        <th>Date</th>
-                        <th>Download</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($uploads as $upload)
-                        <tr>
-                            <td>{{ $upload->file_name }}</td>
-                            <td>{{ $upload->source }}</td>
-                            <td>{{ \Carbon\Carbon::parse($upload->date)->format('Y-m-d') }}</td>
-                            <td>
-                                <a href="{{ route('download.unique.customers') }}" class="btn btn-primary">Unique Customers</a>
-                                <a href="{{ route('download.duplicate.customers') }}" class="btn btn-primary">Duplicate Customers</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @endif
-=======
-  
->>>>>>> 9e8ef1d686c7d134e2e8aff4d249149f4798af23
-    </div>
+   
     </div>
     @endsection

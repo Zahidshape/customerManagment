@@ -96,28 +96,12 @@ class UploadPageController extends Controller
         $response = new StreamedResponse(function () use ($customers) {
             $handle = fopen('php://output', 'w');
 
-<<<<<<< HEAD
             fputcsv($handle, ['Email','Phone Number']);
            
             foreach ($customers as $customer) {
                 fputcsv($handle, [
                     $customer->email,
                     $customer->phone_number,
-=======
-            fputcsv($handle, ['first_name', 'last_name','phone_number','email','address','postcode','county']);
-           
-            foreach ($customers as $customer) {
-                fputcsv($handle, [
-
-                    $customer->first_name,
-                    $customer->last_name,
-                    $customer->phone_number,
-                    $customer->email,
-                    $customer->address,
-                    $customer->postcode,
-                    $customer->county,
-                    
->>>>>>> 9e8ef1d686c7d134e2e8aff4d249149f4798af23
                 ]);
             }
             fclose($handle);
@@ -139,21 +123,6 @@ class UploadPageController extends Controller
 
         $customers = Customer::whereIn('id', $duplicateCustomerIds)->get();   
 
-<<<<<<< HEAD
-        $response = new StreamedResponse(function () use ($customers) {
-            $handle = fopen('php://output', 'w');
-           
-            fputcsv($handle, ['Email','Phone Number']);
-             
-            foreach ($customers as $customer) {
-                fputcsv($handle, [
-                    // $customer->name,
-                    $customer->email,
-                    $customer->phone_number,
-                    // $customer->address,
-                    // $customer->postcode,
-                    // $customer->country
-=======
         $fileName = explode('.', $upload->file_name)[0];
 
 
@@ -185,7 +154,6 @@ class UploadPageController extends Controller
                     $customer->address,
                     $customer->postcode,
                     $customer->county,
->>>>>>> 9e8ef1d686c7d134e2e8aff4d249149f4798af23
                 ]);
             }
             fclose($handle);

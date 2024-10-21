@@ -18,7 +18,7 @@
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-            <p class="mb-0">Files  Uploaded-<span class="text-success text-sm font-weight-bolder">{{ $totalFiles }}</span> </p>
+            <p class="mb-0">Files  Uploaded&nbsp;<span class="text-success text-sm font-weight-bolder">{{ $totalFiles }}</span> </p>
             </div>
           </div>
         </div>
@@ -36,7 +36,7 @@
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-              <p class="mb-0"> Unique Customers-<span class="text-success text-sm font-weight-bolder">{{ $uniquecustomers }} </span></p>
+              <p class="mb-0"> Unique Customers&nbsp;<span class="text-success text-sm font-weight-bolder">{{ $uniquecustomers }} </span></p>
             </div>
           </div>
         </div>
@@ -54,7 +54,7 @@
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-              <p class="mb-0">Duplicate Customer<span class="text-danger text-sm font-weight-bolder">{{$duplicatecustomers}}</span> </p>
+              <p class="mb-0">Duplicate Customer&nbsp;<span class="text-danger text-sm font-weight-bolder">{{$duplicatecustomers}}</span> </p>
             </div>
           </div>
         </div>
