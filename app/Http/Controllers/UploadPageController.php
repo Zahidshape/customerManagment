@@ -65,13 +65,13 @@ class UploadPageController extends Controller
             $fullFilePath = storage_path('app/public/uploads/' . $fileName);
 
          //  Live - Insert Data by command   
-            // $logFilePath = '/home/techsoul/public_html/cms.tech-soul.com/storage/logs/import_customers.log';
-            // $command = '/opt/cpanel/ea-php82/root/usr/bin/php /home/techsoul/public_html/cms.tech-soul.com/artisan import:customers ' . $upload->id . ' "' . $fullFilePath . '" >> ' . $logFilePath . ' 2>&1 &';
-            // pclose(popen($command, 'r'));
+            $logFilePath = '/home/techsoul/public_html/cms.tech-soul.com/storage/logs/import_customers.log';
+            $command = '/opt/cpanel/ea-php82/root/usr/bin/php /home/techsoul/public_html/cms.tech-soul.com/artisan import:customers ' . $upload->id . ' "' . $fullFilePath . '" >> ' . $logFilePath . ' 2>&1 &';
+            pclose(popen($command, 'r'));
 
             // Local - Insert Data by command
-            $command = 'start /B php C:\Users\BUTT\Desktop\cms_clone\customerManagment\artisan import:customers ' . $upload->id . ' "' . $fullFilePath . '" > NUL 2>&1';
-            pclose(popen($command, 'r'));
+            // $command = 'start /B php C:\Users\BUTT\Desktop\cms_clone\customerManagment\artisan import:customers ' . $upload->id . ' "' . $fullFilePath . '" > NUL 2>&1';
+            // pclose(popen($command, 'r'));
 
 
             // ProcessFileJob::dispatch($fullFilePath, $upload->id);
